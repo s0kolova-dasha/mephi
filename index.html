@@ -3,22 +3,130 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Простая страница</title>
+  <title>Лесной край | Зоопарк</title>
   <style>
+    :root {
+      --forest: #173d34;
+      --leaf: #427a55;
+      --cream: #f5f0e5;
+      --sun: #f1b84b;
+      --ink: #20302a;
+      --white: #fffdf8;
+    }
+
+    * { box-sizing: border-box; }
+
     body {
-        background: rgb(187, 112, 186);
-      font-family: Arial, sans-serif;
-      margin: 40px;
-      color: #000;
+      margin: 0;
+      color: var(--ink);
+      background: var(--cream);
+      font-family: Georgia, 'Times New Roman', serif;
+    }
+
+    .hero {
+      min-height: 570px;
+      padding: 28px 7vw 64px;
+      color: var(--white);
+      background: linear-gradient(115deg, rgba(16, 49, 39, .96), rgba(37, 91, 61, .76)),
+        url('https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=1800&q=85') center/cover;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .brand {
+      font-size: 1.25rem;
+      font-weight: bold;
+      letter-spacing: .04em;
+    }
+
+    nav a { color: var(--white); text-decoration: none; margin-left: 24px; font-family: Arial, sans-serif; font-size: .9rem; }
+
+    .hero-content { max-width: 1180px; margin: 135px auto 0; }
+    .eyebrow { color: var(--sun); font: bold .8rem Arial, sans-serif; letter-spacing: .18em; text-transform: uppercase; }
+    h1 { max-width: 650px; margin: 16px 0; font-size: clamp(3.4rem, 8vw, 7rem); line-height: .9; font-weight: normal; }
+    .hero p { max-width: 450px; margin: 24px 0 32px; color: #e2eadf; font: 1.1rem/1.6 Arial, sans-serif; }
+    .button { display: inline-block; padding: 15px 23px; color: var(--forest); background: var(--sun); border-radius: 3px; font: bold .9rem Arial, sans-serif; text-decoration: none; }
+
+    main { max-width: 1180px; margin: 0 auto; padding: 74px 7vw; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 28px; }
+    h2 { margin: 0; color: var(--forest); font-size: clamp(2rem, 4vw, 3.3rem); font-weight: normal; }
+    .section-heading p { max-width: 360px; margin: 0; font: .95rem/1.5 Arial, sans-serif; color: #66756d; }
+
+    .animals { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .animal { overflow: hidden; background: var(--white); border: 1px solid #e4ded1; }
+    .animal img { display: block; width: 100%; height: 260px; object-fit: cover; }
+    .animal-copy { padding: 19px 20px 22px; }
+    .animal h3 { margin: 0 0 7px; color: var(--forest); font-size: 1.5rem; font-weight: normal; }
+    .animal p { margin: 0; color: #68746d; font: .9rem/1.45 Arial, sans-serif; }
+
+    .visit { display: grid; grid-template-columns: 1.3fr 1fr; gap: 50px; align-items: center; margin-top: 88px; padding: 48px; background: var(--forest); color: var(--white); }
+    .visit h2 { color: var(--white); }
+    .visit p { max-width: 420px; color: #c8d8cb; font: 1rem/1.6 Arial, sans-serif; }
+    .hours { display: grid; gap: 13px; font: .95rem Arial, sans-serif; }
+    .hours div { display: flex; justify-content: space-between; gap: 20px; padding-bottom: 12px; border-bottom: 1px solid #52705e; }
+    footer { padding: 25px 7vw; background: #102b24; color: #a9bcae; font: .8rem Arial, sans-serif; text-align: center; }
+
+    @media (max-width: 700px) {
+      .hero { min-height: 620px; padding-inline: 8vw; }
+      nav a { display: none; }
+      .hero-content { margin-top: 120px; }
+      main { padding: 58px 8vw; }
+      .section-heading, .visit { display: block; }
+      .section-heading p { margin-top: 15px; }
+      .animals { grid-template-columns: 1fr; }
+      .animal img { height: 230px; }
+      .visit { margin-top: 60px; padding: 32px 25px; }
+      .hours { margin-top: 30px; }
     }
   </style>
 </head>
 <body>
-  <h1>Заголовок H1</h1>
-  <h2>Подзаголовок H2</h2>
-  <h3>Ещё меньше H3</h3>
-  
-  <p>Обычный текст. Просто белый фон и ничего лишнего.</p>
-  <p>Ещё один абзац.</p>
+  <header class="hero">
+    <nav>
+      <div class="brand">ЛЕСНОЙ КРАЙ</div>
+      <div><a href="#animals">Животные</a><a href="#visit">Посещение</a></div>
+    </nav>
+    <div class="hero-content">
+      <div class="eyebrow">Зоопарк рядом с городом</div>
+      <h1>Дикая<br>природа ближе.</h1>
+      <p>Место, где любопытство встречается с заботой, а каждый день начинается с настоящих открытий.</p>
+      <a class="button" href="#visit">Спланировать визит</a>
+    </div>
+  </header>
+
+  <main>
+    <section id="animals">
+      <div class="section-heading">
+        <h2>Наши жители</h2>
+        <p>Познакомьтесь с теми, кто делает «Лесной край» особенным.</p>
+      </div>
+      <div class="animals">
+        <article class="animal">
+          <img src="https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=900&q=80" alt="Жираф">
+          <div class="animal-copy"><h3>Жирафы</h3><p>Тихие гиганты с самым добрым взглядом.</p></div>
+        </article>
+        <article class="animal">
+          <img src="https://images.unsplash.com/photo-1561731216-c3a4d99437d5?auto=format&fit=crop&w=900&q=80" alt="Лев">
+          <div class="animal-copy"><h3>Большие кошки</h3><p>Грация, сила и уважение к дикой природе.</p></div>
+        </article>
+        <article class="animal">
+          <img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=900&q=80" alt="Слон">
+          <div class="animal-copy"><h3>Слоны</h3><p>Семейные истории, которым миллионы лет.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="visit" id="visit">
+      <div><h2>Приезжайте<br>в гости</h2><p>Берите удобную обувь, хорошее настроение и целый день на знакомство с обитателями зоопарка.</p><a class="button" href="mailto:hello@lesnoy-krai.ru">Задать вопрос</a></div>
+      <div class="hours"><div><span>Пн–Пт</span><strong>09:00 — 20:00</strong></div><div><span>Сб–Вс</span><strong>08:00 — 21:00</strong></div><div><span>Кассы закрываются</span><strong>за час до закрытия</strong></div></div>
+    </section>
+  </main>
+  <footer>ЛЕСНОЙ КРАЙ · место для больших и маленьких открытий</footer>
 </body>
 </html>
