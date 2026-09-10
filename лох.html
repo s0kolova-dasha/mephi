@@ -182,7 +182,7 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      z-index: 35;
+      z-index: 210;
       overflow: hidden;
     }
 
@@ -217,6 +217,65 @@
     }
 
     body.shake { animation: shake 0.55s; }
+
+    .fx-meme {
+      position: absolute;
+      width: 170px;
+      pointer-events: auto;
+      cursor: pointer;
+      border: 5px solid #fff;
+      box-shadow: 8px 8px 0 #000;
+      border-radius: 8px;
+      z-index: 211;
+    }
+
+    .fx-meme.fly-a { animation: memeA 7s linear forwards; }
+    .fx-meme.fly-b { animation: memeB 6.5s ease-in forwards; }
+    .fx-meme.fly-c { animation: memeC 8s ease-out forwards; }
+    .fx-meme.fly-d { animation: memeD 6s ease-in-out forwards; }
+
+    .meme-smash {
+      position: fixed;
+      inset: 0;
+      z-index: 220;
+      display: grid;
+      place-items: center;
+      pointer-events: none;
+      animation: smashOut 1.35s ease forwards;
+    }
+
+    .meme-smash img {
+      width: min(420px, 70vw);
+      border: 10px solid #fff;
+      box-shadow: 0 0 0 8px #000, 18px 18px 0 #ff0;
+      transform: rotate(-8deg);
+    }
+
+    .meme-smash b {
+      position: absolute;
+      bottom: 12%;
+      font-size: clamp(28px, 6vw, 64px);
+      color: #fff;
+      text-shadow: 4px 4px 0 #000, -2px -2px 0 #ff0080;
+      text-align: center;
+      max-width: 90vw;
+    }
+
+    .meme-wall {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      padding: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .meme-wall img {
+      width: 100%;
+      border: 4px solid #fff;
+      box-shadow: 8px 8px 0 #000;
+      cursor: pointer;
+    }
 
     form {
       display: grid;
@@ -459,12 +518,43 @@
       60% { transform: translateX(-8px); }
       80% { transform: translateX(8px); }
     }
+
+    @keyframes memeA {
+      0% { left: -20%; top: 70%; transform: rotate(-30deg) scale(0.4); }
+      40% { top: 20%; transform: rotate(18deg) scale(1.15); }
+      100% { left: 110%; top: 8%; transform: rotate(50deg) scale(0.7); opacity: 0; }
+    }
+
+    @keyframes memeB {
+      0% { left: 110%; top: 10%; transform: rotate(25deg) scale(0.5); }
+      50% { top: 55%; transform: rotate(-20deg) scale(1.2); }
+      100% { left: -25%; top: 80%; transform: rotate(-40deg) scale(0.6); opacity: 0; }
+    }
+
+    @keyframes memeC {
+      0% { left: 40%; top: 110%; transform: scale(0.2) rotate(0); }
+      30% { transform: scale(1.35) rotate(-12deg); }
+      100% { left: 45%; top: -30%; transform: scale(0.8) rotate(25deg); opacity: 0; }
+    }
+
+    @keyframes memeD {
+      0% { left: 50%; top: 40%; transform: translate(-50%, -50%) scale(0) rotate(-180deg); }
+      25% { transform: translate(-50%, -50%) scale(1.4) rotate(12deg); }
+      100% { left: 8%; top: -20%; transform: rotate(40deg) scale(0.5); opacity: 0; }
+    }
+
+    @keyframes smashOut {
+      0% { opacity: 0; transform: scale(0.2); }
+      18% { opacity: 1; transform: scale(1.12); }
+      70% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(1.4) rotate(8deg); }
+    }
   </style>
 </head>
 <body>
   <div class="cursor-trail" id="trail"></div>
   <div class="fx-layer" id="fx"></div>
-  <marquee>СРОЧНО! Бесплатный iPhone 47 Pro Max Ultra. Осталось 3 штуки. Только для лохов. Крестик НЕ закрывает окна!!!</marquee>
+  <marquee>ОКАК!!! Очень необычно зайка!!! Вот такая вот хуйня собачка!!! Крестик НЕ закрывает окна!!!</marquee>
 
   <header>
     <div class="logo">ЛОХ.РФ</div>
@@ -479,6 +569,7 @@
     <button class="tab-btn" type="button" data-tab="prince">Принц</button>
     <button class="tab-btn" type="button" data-tab="casino">Казино</button>
     <button class="tab-btn" type="button" data-tab="ads">Реклама</button>
+    <button class="tab-btn" type="button" data-tab="memes">Мемы</button>
   </nav>
 
   <section class="tab-panel active" id="tab-home">
@@ -491,6 +582,7 @@
       <p>
         <button class="btn" id="winBtn" type="button" data-anim="prize" data-mascot="🏆">Я уже лох, забрать приз</button>
         <button class="btn danger" id="adsBtn" type="button" data-anim="clown">Закрыть рекламу ✕</button>
+        <button class="btn" id="okakBtn" type="button" data-anim="stamp">ОКАК</button>
       </p>
       <p>
         <button class="btn runaway" id="smartBtn" type="button">Я умный, уйти с сайта</button>
@@ -626,6 +718,19 @@
     </div>
   </section>
 
+  <section class="tab-panel" id="tab-memes">
+    <div class="hero">
+      <h2>Архив священных мемов</h2>
+      <p>Кликни картинку. Или просто подожди — они сами вылетят, потому что ты лох.</p>
+      <button class="btn danger" id="memeStormBtn" type="button">Выпустить всех зайцев</button>
+    </div>
+    <div class="meme-wall">
+      <img src="memes/okak.png" alt="окак" data-meme="0">
+      <img src="memes/zaika.png" alt="очень необычно зайка" data-meme="1">
+      <img src="memes/sobachka.png" alt="вот такая вот хуйня собачка" data-meme="2">
+    </div>
+  </section>
+
   <footer>
     © 2026 Союз лохов. Cookies: мы сохраняем только факт, что вы лох.<br>
     Это шуточный сайт. Никаких призов, карт и «взносов» тут нет.
@@ -652,6 +757,65 @@
     const cringe = document.getElementById("cringe");
     const online = document.getElementById("online");
 
+    const MEMES = [
+      { src: "memes/okak.png", yell: "ОКАК!!!", say: "о как" },
+      { src: "memes/zaika.png", yell: "ОЧЕНЬ НЕОБЫЧНО ЗАЙКА", say: "очень необычно зайка" },
+      { src: "memes/sobachka.png", yell: "ВОТ ТАКАЯ ВОТ ХУЙНЯ СОБАЧКА", say: "вот такая вот хуйня собачка" }
+    ];
+    const FLY = ["fly-a", "fly-b", "fly-c", "fly-d"];
+
+    function shout(text) {
+      try {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = "ru-RU";
+        u.rate = 1.05;
+        u.pitch = 1.4;
+        window.speechSynthesis.speak(u);
+      } catch (e) {}
+    }
+
+    function pickMeme() {
+      return MEMES[Math.floor(Math.random() * MEMES.length)];
+    }
+
+    function smashMeme(meme) {
+      const item = meme || pickMeme();
+      const wrap = document.createElement("div");
+      wrap.className = "meme-smash";
+      wrap.innerHTML = "<img alt=\"\" src=\"" + item.src + "\"><b>" + item.yell + "</b>";
+      document.body.appendChild(wrap);
+      shout(item.say);
+      stamp(item.yell.split(" ")[0]);
+      setTimeout(() => wrap.remove(), 1400);
+    }
+
+    function flyMeme(meme) {
+      const item = meme || pickMeme();
+      const img = document.createElement("img");
+      img.src = item.src;
+      img.alt = item.yell;
+      img.className = "fx-meme " + FLY[Math.floor(Math.random() * FLY.length)];
+      img.style.left = Math.random() * 70 + "vw";
+      img.style.top = Math.random() * 50 + "vh";
+      img.style.width = 130 + Math.random() * 110 + "px";
+      img.addEventListener("click", (e) => {
+        e.stopPropagation();
+        smashMeme(item);
+        memeStorm(6);
+      });
+      fx.appendChild(img);
+      setTimeout(() => img.remove(), 8500);
+    }
+
+    function memeStorm(count) {
+      const n = count || 8;
+      for (let i = 0; i < n; i++) {
+        setTimeout(() => flyMeme(), i * 90);
+      }
+      if (n >= 10) smashMeme();
+    }
+
     const cringeLevels = [
       {
         title: "iPhone почти ваш!!!",
@@ -669,9 +833,19 @@
         text: "Без этой панели ваш браузер будет грустить. И вы тоже. Особенно после ещё одного крестика."
       },
       {
-        title: "ГОРЯЧИЕ СКИДКИ РЯДОМ С ВАМИ",
-        mascot: "🥵",
-        text: "В радиусе 5 метров найдены: ваш стыд, три баннера и принц. Позвонить? Уже звоним вашему Wi‑Fi."
+        title: "ОКАК",
+        mascot: "🐸",
+        text: "Вы нажали крестик. Лягушка увидела это. Лягушка разочарована. Окак."
+      },
+      {
+        title: "Очень необычно зайка",
+        mascot: "🐰",
+        text: "Зайка смотрит на человека, который пытается закрыть рекламу крестиком. Очень необычно. Даже для зайки."
+      },
+      {
+        title: "Вот такая вот хуйня собачка",
+        mascot: "🐕",
+        text: "Собачка всё видела. Собачка не осуждает. Собачка просто констатирует факт."
       },
       {
         title: "VIRUS DETECTED x999",
@@ -761,6 +935,7 @@
       } else {
         rain(["😂", "🤡"], 12);
       }
+      memeStorm(type ? 7 : 5);
     }
 
     function openPopup(text, mascot) {
@@ -808,6 +983,8 @@
       win.querySelector(".cringe-x").addEventListener("click", (e) => {
         e.stopPropagation();
         playAnim("clown");
+        smashMeme();
+        memeStorm(10);
         spawnCringe(level + 1);
       });
 
@@ -871,6 +1048,22 @@
     document.getElementById("adsBtn").addEventListener("click", () => spawnCringe(0));
     document.getElementById("cringeBtn").addEventListener("click", () => spawnCringe(0));
     document.getElementById("virusBtn").addEventListener("click", () => spawnCringe(4));
+    document.getElementById("okakBtn").addEventListener("click", () => {
+      smashMeme(MEMES[0]);
+      memeStorm(12);
+    });
+    document.getElementById("memeStormBtn").addEventListener("click", () => {
+      smashMeme();
+      memeStorm(18);
+      spawnCringe(0);
+    });
+    document.querySelectorAll("[data-meme]").forEach((img) => {
+      img.addEventListener("click", () => {
+        const item = MEMES[Number(img.dataset.meme)];
+        smashMeme(item);
+        memeStorm(9);
+      });
+    });
 
     document.getElementById("testBtn").addEventListener("click", () => {
       const result = document.getElementById("testResult");
@@ -1092,8 +1285,14 @@
       online.textContent = (6000000 + Math.floor(Math.random() * 99999)).toLocaleString("ru-RU");
     }, 1200);
 
+    setInterval(() => {
+      flyMeme();
+      if (Math.random() > 0.72) smashMeme();
+    }, 3200);
+
     setTimeout(() => {
       playAnim("clown");
+      smashMeme(MEMES[0]);
       spawnCringe(0);
     }, 1800);
   </script>
